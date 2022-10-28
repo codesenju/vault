@@ -1,0 +1,40 @@
+version: "3"
+services:
+  vault:
+    image: vault:1.12.0
+    container_name: vault-tls
+    command:
+      - 'server' 
+#    network_mode: host
+    environment:
+      VAULT_ADDR: "https://<HOSTNAME>:5001"
+      VAULT_CACERT: "/vault/userconfig/vault-server-tls/<HOSTNAME>-crt.pem"
+    networks:
+      - devops
+    ports:
+      - 5001:5001
+    volumes:
+      - ./certs:/vault/userconfig/vault-server-tls
+      - ./config:/vault/config
+      - ./data:/vault/data
+      - ./logs:/vault/logs
+    cap_add:
+      - IPC_LOCK
+#    logging:
+#      driver: "fluentd"
+#      options:
+#        fluentd-address: <HOSTNAME>:24224
+#        tag: int
+#  postgres:
+#    image: postgres:12-alpine
+#    container_name: postgres
+#    environment:
+#      POSTGRES_USER: "root"
+#      POSTGRES_PASSWORD: "rootpassword"
+#    networks:
+#      - devops
+#    ports:
+#      - 5432:5432
+networks:
+  devops:
+    external: true

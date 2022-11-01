@@ -20,3 +20,10 @@ disable_mlock = true
 api_addr = "https://0.0.0.0:5001"
 cluster_addr = "https://127.0.0.1:5002"
 ui = true
+
+
+C:\Program Files\Java\jdk1.8.0_333\jre\lib\security\cacerts
+
+keytool -import -alias vault -file C:\Users\F5367204\DevOps\Certs\fas-rbglint04-crt.pem -keystore C:\Program Files\Java\jdk1.8.0_333\jre\lib\security\cacerts
+
+vault123
